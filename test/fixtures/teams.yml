@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  abbreviation: MyString
+  first_year: 1
+  conference: MyString
+  division: MyString
+  web_site: MyString
+
+two:
+  name: MyString
+  abbreviation: MyString
+  first_year: 1
+  conference: MyString
+  division: MyString
+  web_site: MyString
