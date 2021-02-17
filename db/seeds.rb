@@ -14,24 +14,14 @@ def fetch_data(url)
   JSON.parse(open(url).read)
 end
 
-def team_ids
-  fetch_data("https://statsapi.web.nhl.com/api/v1/teams")
-end
-
-# Gets specific team data based on the team id passed
-def team_info(id)
-  fetch_data("https://statsapi.web.nhl.com/api/v1/teams/#{id}")
-end
-
 def team_roster(id)
   fetch_data("https://statsapi.web.nhl.com/api/v1/teams/#{id}/roster")
 end
 
 teams = fetch_data("https://statsapi.web.nhl.com/api/v1/teams")
-# team_ids = 0..30
 teams["teams"].each do |team_index|
-  # Create Teams Here
-  Team.create(
+  # Create Teams with data fetched from NHL API
+  team = Team.find_or_create_by(
     name:         team_index["name"],
     abbreviation: team_index["abbreviation"],
     first_year:   team_index["firstYearOfPlay"],
@@ -41,15 +31,19 @@ teams["teams"].each do |team_index|
     venue:        team_index["venue"]["name"]
   )
 
-  # Create Players Here
-  # roster = team_roster(team_index["id"])
-  # roster["roster"].each do |player|
-  #   Player.create(
-  #     team_id:               team_index,
-  #     full_name:             player["person"]["fullName"],
-  #     position:              player["position"]["name"],
-  #     position_abbreviation: player["position"]["abbreviation"],
-  #     jersey_number:         player["jerseyNumber"]
-  #   )
-  # end
+  # If the team exists and it's a valid team, create the roster of players for that team
+  next unless team&.valid?
+
+  roster = team_roster(team_index["id"])
+  roster["roster"].each do |player|
+    team.Player.create(
+      full_name:             player["person"]["fullName"],
+      position:              player["position"]["name"],
+      position_abbreviation: player["position"]["abbreviation"],
+      jersey_number:         player["jerseyNumber"]
+    )
+  end
 end
+
+# puts "Created #{Team.count} NHL Teams"
+# puts "Created #{Player.count} Players"
