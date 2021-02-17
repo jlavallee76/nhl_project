@@ -10,22 +10,41 @@ require "open-uri"
 require "json"
 
 # Fetches and decodes all team data from the NHL stats API
-def team_fetch(url)
+def fetch_data(url)
   JSON.parse(open(url).read)
+end
+
+def team_ids
+  fetch_data("https://statsapi.web.nhl.com/api/v1/teams")
 end
 
 # Gets specific team data based on the team id passed
 def team_info(id)
-  team_fetch("https://statsapi.web.nhl.com/api/v1/teams/#{id}")
+  fetch_data("https://statsapi.web.nhl.com/api/v1/teams/#{id}")
 end
 
-team_ids = 1..30
-team_ids.each do |team_id|
-  team = team_info(team_id)
-  puts team["teams"][0]["name"]
-  puts team["teams"][0]["venue"]["name"]
-  puts team["teams"][0]["firstYearOfPlay"]
-  puts team["teams"][0]["conference"]["name"]
-  puts team["teams"][0]["division"]["name"]
-  puts team["teams"][0]["officialSiteUrl"]
+def team_roster(id)
+  fetch_data("https://statsapi.web.nhl.com/api/v1/teams/#{id}/roster")
+end
+
+team_ids = 0..1
+team_ids.each do |team_index|
+  teams = fetch_data("https://statsapi.web.nhl.com/api/v1/teams")
+
+  # Create Teams Here
+  puts teams["teams"][team_index]["name"]
+  # puts team["teams"][team_index]["venue"]["name"]
+  # puts team["teams"][team_index]["firstYearOfPlay"]
+  # puts team["teams"][team_index]["conference"]["name"]
+  # puts team["teams"][team_index]["division"]["name"]
+  # puts team["teams"][team_index]["officialSiteUrl"]
+  # puts teams["teams"][team_index]["id"]
+
+  roster = team_roster(teams["teams"][team_index]["id"])
+
+  # Create Players Here
+  puts "Roster: "
+  roster["roster"].each do |player|
+    puts "#{player['person']['fullName']} : #{player['position']['abbreviation']} : #{player['jerseyNumber']} : #{teams['teams'][team_index]['abbreviation']} \n"
+  end
 end
