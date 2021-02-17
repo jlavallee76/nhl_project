@@ -28,23 +28,28 @@ def team_roster(id)
 end
 
 teams = fetch_data("https://statsapi.web.nhl.com/api/v1/teams")
-team_ids = 0..30
-team_ids.each do |team_index|
+# team_ids = 0..30
+teams["teams"].each do |team_index|
   # Create Teams Here
   Team.create(
-    name:         teams["teams"][team_index]["name"],
-    abbreviation: teams["teams"][team_index]["abbreviation"],
-    first_year:   teams["teams"][team_index]["firstYearOfPlay"],
-    conference:   teams["teams"][team_index]["conference"]["name"],
-    division:     teams["teams"][team_index]["division"]["name"],
-    web_site:     teams["teams"][team_index]["officialSiteUrl"],
-    venue:        teams["teams"][team_index]["venue"]["name"]
+    name:         team_index["name"],
+    abbreviation: team_index["abbreviation"],
+    first_year:   team_index["firstYearOfPlay"],
+    conference:   team_index["conference"]["name"],
+    division:     team_index["division"]["name"],
+    web_site:     team_index["officialSiteUrl"],
+    venue:        team_index["venue"]["name"]
   )
 
   # Create Players Here
-  # roster = team_roster(teams["teams"][team_index]["id"])
-  # puts "Roster: "
+  # roster = team_roster(team_index["id"])
   # roster["roster"].each do |player|
-  #   puts "#{player['person']['fullName']} : #{player['position']['abbreviation']} : #{player['jerseyNumber']} : #{teams['teams'][team_index]['abbreviation']} \n"
+  #   Player.create(
+  #     team_id:               team_index,
+  #     full_name:             player["person"]["fullName"],
+  #     position:              player["position"]["name"],
+  #     position_abbreviation: player["position"]["abbreviation"],
+  #     jersey_number:         player["jerseyNumber"]
+  #   )
   # end
 end
