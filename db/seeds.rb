@@ -37,15 +37,9 @@ team_ids.each do |team_index|
     first_year:   teams["teams"][team_index]["firstYearOfPlay"],
     conference:   teams["teams"][team_index]["conference"]["name"],
     division:     teams["teams"][team_index]["division"]["name"],
-    web_site:     teams["teams"][team_index]["officialSiteUrl"]
+    web_site:     teams["teams"][team_index]["officialSiteUrl"],
+    venue:        teams["teams"][team_index]["venue"]["name"]
   )
-  puts teams["teams"][team_index]["name"]
-  # puts teams["teams"][team_index]["venue"]["name"]
-  # puts teams["teams"][team_index]["firstYearOfPlay"]
-  # puts teams["teams"][team_index]["conference"]["name"]
-  # puts teams["teams"][team_index]["division"]["name"]
-  # puts teams["teams"][team_index]["officialSiteUrl"]
-  # puts teams["teams"][team_index]["id"]
 
   # Create Players Here
   # roster = team_roster(teams["teams"][team_index]["id"])
