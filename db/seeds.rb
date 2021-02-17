@@ -27,24 +27,30 @@ def team_roster(id)
   fetch_data("https://statsapi.web.nhl.com/api/v1/teams/#{id}/roster")
 end
 
-team_ids = 0..1
+teams = fetch_data("https://statsapi.web.nhl.com/api/v1/teams")
+team_ids = 0..30
 team_ids.each do |team_index|
-  teams = fetch_data("https://statsapi.web.nhl.com/api/v1/teams")
-
   # Create Teams Here
+  Team.create(
+    name:         teams["teams"][team_index]["name"],
+    abbreviation: teams["teams"][team_index]["abbreviation"],
+    first_year:   teams["teams"][team_index]["firstYearOfPlay"],
+    conference:   teams["teams"][team_index]["conference"]["name"],
+    division:     teams["teams"][team_index]["division"]["name"],
+    web_site:     teams["teams"][team_index]["officialSiteUrl"]
+  )
   puts teams["teams"][team_index]["name"]
-  # puts team["teams"][team_index]["venue"]["name"]
-  # puts team["teams"][team_index]["firstYearOfPlay"]
-  # puts team["teams"][team_index]["conference"]["name"]
-  # puts team["teams"][team_index]["division"]["name"]
-  # puts team["teams"][team_index]["officialSiteUrl"]
+  # puts teams["teams"][team_index]["venue"]["name"]
+  # puts teams["teams"][team_index]["firstYearOfPlay"]
+  # puts teams["teams"][team_index]["conference"]["name"]
+  # puts teams["teams"][team_index]["division"]["name"]
+  # puts teams["teams"][team_index]["officialSiteUrl"]
   # puts teams["teams"][team_index]["id"]
 
-  roster = team_roster(teams["teams"][team_index]["id"])
-
   # Create Players Here
-  puts "Roster: "
-  roster["roster"].each do |player|
-    puts "#{player['person']['fullName']} : #{player['position']['abbreviation']} : #{player['jerseyNumber']} : #{teams['teams'][team_index]['abbreviation']} \n"
-  end
+  # roster = team_roster(teams["teams"][team_index]["id"])
+  # puts "Roster: "
+  # roster["roster"].each do |player|
+  #   puts "#{player['person']['fullName']} : #{player['position']['abbreviation']} : #{player['jerseyNumber']} : #{teams['teams'][team_index]['abbreviation']} \n"
+  # end
 end
