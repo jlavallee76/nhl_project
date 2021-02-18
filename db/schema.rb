@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_17_175500) do
+ActiveRecord::Schema.define(version: 2021_02_17_222345) do
+
+  create_table "players", force: :cascade do |t|
+    t.string "full_name"
+    t.string "position"
+    t.string "position_abbreviation"
+    t.integer "jersey_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "team_id", null: false
+    t.index ["team_id"], name: "index_players_on_team_id"
+  end
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
@@ -24,4 +35,5 @@ ActiveRecord::Schema.define(version: 2021_02_17_175500) do
     t.string "venue"
   end
 
+  add_foreign_key "players", "teams"
 end

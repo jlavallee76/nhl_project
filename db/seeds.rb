@@ -36,7 +36,7 @@ teams["teams"].each do |team_index|
 
   roster = team_roster(team_index["id"])
   roster["roster"].each do |player|
-    team.Player.create(
+    team.players.create(
       full_name:             player["person"]["fullName"],
       position:              player["position"]["name"],
       position_abbreviation: player["position"]["abbreviation"],
@@ -45,5 +45,5 @@ teams["teams"].each do |team_index|
   end
 end
 
-# puts "Created #{Team.count} NHL Teams"
-# puts "Created #{Player.count} Players"
+puts "Created #{Team.count} NHL Teams"
+puts "Created #{Player.count} Players"
