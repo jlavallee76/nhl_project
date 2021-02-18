@@ -1,21 +1,13 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
-
-<p>
-  <strong>Abbreviation:</strong>
-  <%= @team.abbreviation %>
-</p>
-
-<p>
-  <strong>First year:</strong>
-  <%= @team.first_year %>
-</p>
-
-<p>
+<section class="hero is-dark">
+  <div class="hero-body">
+    <p class="title">
+      <%= @team.name %>
+    </p>
+    <p class="subtitle">
+      Established <%= @team.first_year %>
+    </p>
+    <p>
   <strong>Conference:</strong>
   <%= @team.conference %>
 </p>
@@ -24,11 +16,36 @@
   <strong>Division:</strong>
   <%= @team.division %>
 </p>
-
-<p>
-  <strong>Web site:</strong>
-  <%= @team.web_site %>
+    <p>
+  <strong>Venue:</strong>
+  <%= @team.venue %>
 </p>
+    <p>
+  <strong>Web site:</strong>
+  <%= link_to @team.web_site, @team.web_site %>
+</p>
+  </div>
 
-<%= link_to 'Edit', edit_team_path(@team) %> |
+</section>
+
+<div class="columns is-multiline">
+  <% @team.players.each do | player |%>
+    <div class="card column is-one-third">
+      <div class="card-content has-background-grey-light">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="https://tekrabuilders.com/wp-content/uploads/2018/12/male-placeholder-image.jpeg" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4"><%= link_to player.full_name, player %></p>
+            <p class="subtitle is-6"><%= player.jersey_number %> | <%= player.position %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</section>
+
 <%= link_to 'Back', teams_path %>

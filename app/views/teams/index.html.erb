@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Venue</th>
       <th>Abbreviation</th>
       <th>First year</th>
       <th>Conference</th>
@@ -19,6 +20,7 @@
     <% @teams.each do |team| %>
       <tr>
         <td><%= team.name %></td>
+        <td><%= team.venue %></td>
         <td><%= team.abbreviation %></td>
         <td><%= team.first_year %></td>
         <td><%= team.conference %></td>

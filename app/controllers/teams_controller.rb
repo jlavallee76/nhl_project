@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: %i[ show edit update destroy ]
+  before_action :set_team, only: %i[show]
 
   # GET /teams or /teams.json
   def index
@@ -8,6 +8,7 @@ class TeamsController < ApplicationController
 
   # GET /teams/1 or /teams/1.json
   def show
+    @team = Team.find(params[:id])
   end
 
   # GET /teams/new
@@ -16,8 +17,7 @@ class TeamsController < ApplicationController
   end
 
   # GET /teams/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /teams or /teams.json
   def create
@@ -57,13 +57,15 @@ class TeamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_team
-      @team = Team.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def team_params
-      params.require(:team).permit(:name, :abbreviation, :first_year, :conference, :division, :web_site)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_team
+    @team = Team.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def team_params
+    params.require(:team).permit(:name, :abbreviation, :first_year, :conference, :division,
+                                 :web_site)
+  end
 end

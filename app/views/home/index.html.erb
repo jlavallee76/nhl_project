@@ -1,0 +1,28 @@
+<div class="columns">
+  <div class="column">
+    <h2 class="title is-2">Top 10 Teams</h2>
+    <ol class="ml-5">
+      <% @teams.each do | team | %>
+        <li><%= link_to team.name , team %> <em>(Points In Here?)</em></li>
+      <% end %>
+    </ol>
+  </div>
+
+  <div class="column">
+    <h2 class="title is-2">Top 10 Players </h2>
+    <ol class="ml-5">
+      <% @players.each do | player | %>
+        <li><%= link_to player.full_name, player %> <em>(Points In Here?)</em></li>
+      <% end %>
+    </ol>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Ruby on Rails NHL Project</strong> by <a href="https://yoshigrams.com">Josh Lavallee</a>.
+    </p>
+  </div>
+</footer>
+
