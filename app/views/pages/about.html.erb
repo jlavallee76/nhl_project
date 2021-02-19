@@ -1,1 +1,13 @@
 <h1 class="title is-1 mt-2">About Page</h1>
+
+<p class="mb-3">The data used in the creation of this was taken from the NHL Stats API.</p>
+
+<p class="mb-3">The two datasets I used in order to create my AR models were from the Team and Roster endpoints. The JSON contained existing Primary and Foreign keys, so in order to associate each team with their roster, I used the existing PK to pull the players for that team in sequence before moving onto the next team. When assosciating the player within my Database I used the automatically created PK instead of the provided PK so the local data was related.</p>
+
+<p class="mb-3">Team data consists of a PK team_id, team name, team abbreviation, venue, website, and the year they joined the league. All this data was validated as required and the year as integer_only to ensure no floating numbers are inserted to the database. All other columns were assigned as strings with presence required.</p>
+
+<p class="mb-3">Player data consists of a PK player_id and FK of their corresponding team team_id. The data includes the players full name, jersey number, position, and position abbreviation. All columns were strings other than the jersey number which was an integer validated as only_integer. The only required column for this model was the full_name.</p>
+
+<h2 class="title is-2 mt-2">ERD</h1>
+
+<%= image_tag("nhl_erd.png", :alt => "ERD") %>

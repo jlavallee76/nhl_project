@@ -1,19 +1,19 @@
-<div class="columns">
-  <div class="column">
-    <h2 class="title is-2">Top 10 Teams</h2>
-    <ol class="ml-5">
+<div class="columns mt-2 ml-2">
+  <div class="column mt-5">
+    <h2 class="title is-2">Teams</h2>
+    <ul class="">
       <% @teams.each do | team | %>
-        <li><%= link_to team.name , team %> <em>(Points In Here?)</em></li>
+        <li><%= link_to team.name , team %> <em>(Team Points)</em></li>
       <% end %>
-    </ol>
+    </ul>
   </div>
 
-  <div class="column">
-    <h2 class="title is-2">Top 10 Players </h2>
-    <ol class="ml-5">
+  <div class="column mt-5">
+    <h2 class="title is-2">Players </h2>
+    <ul class="">
       <% @players.each do | player | %>
-        <li><%= link_to player.full_name, player %> <em>(Points In Here?)</em></li>
+        <li><%= link_to player.full_name, player %> <em>(Player Points)</em></li>
       <% end %>
-    </ol>
+    </ul>
   </div>
 </div>

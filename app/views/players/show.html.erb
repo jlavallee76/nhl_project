@@ -1,18 +1,8 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Full name:</strong>
-  <%= @player.full_name %>
-</p>
-
+<h1 class="title is-1 mt-2"><%= @player.full_name %> | <%= @player.position_abbreviation %></h1>
 <p>
   <strong>Position:</strong>
   <%= @player.position %>
-</p>
-
-<p>
-  <strong>Position abbreviation:</strong>
-  <%= @player.position_abbreviation %>
 </p>
 
 <p>
@@ -20,5 +10,6 @@
   <%= @player.jersey_number %>
 </p>
 
-<%= link_to 'Edit', edit_player_path(@player) %> |
-<%= link_to 'Back', players_path %>
+<p class="mt-2 mb-2">
+  <strong><%= link_to "Back to " + @team.abbreviation, @team %></strong>
+</p>
