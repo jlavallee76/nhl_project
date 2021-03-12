@@ -1,29 +1,36 @@
 <p id="notice"><%= notice %></p>
 <section class="hero is-dark">
   <div class="hero-body">
-    <p class="title">
+    <p class="title is-1">
       <%= @team.name %>
     </p>
     <p class="subtitle">
-      Established <%= @team.first_year %>
+      <%= link_to @team.web_site, @team.web_site %>
     </p>
-    <p>
-  <strong>Conference:</strong>
-  <%= @team.conference %>
-</p>
-
-<p>
-  <strong>Division:</strong>
-  <%= @team.division %>
-</p>
-    <p>
-  <strong>Venue:</strong>
-  <%= @team.venue %>
-</p>
-    <p>
-  <strong>Web site:</strong>
-  <%= link_to @team.web_site, @team.web_site %>
-</p>
+      <div class="level">
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Conference</p>
+      <p class="title"><%= @team.conference %></p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Division</p>
+      <p class="title"><%= @team.division %></p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Venue</p>
+      <p class="title"><%= @team.venue %></p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Established</p>
+      <p class="title"><%= @team.first_year %></p>
+    </div>
   </div>
 
 </section>

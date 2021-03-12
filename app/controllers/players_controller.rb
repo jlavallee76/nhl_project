@@ -3,13 +3,17 @@ class PlayersController < ApplicationController
 
   # GET /players or /players.json
   def index
-    @players = Player.all
+    @players = Player.all.order("jersey_number").paginate(page: params[:page], per_page: 25)
   end
 
   # GET /players/1 or /players/1.json
   def show
     @player = Player.find(params[:id])
     @team = Team.find(@player.team_id)
+  end
+
+  def search
+    @players = Player.where("full_name LIKE ?", "%" + params[:q] + "%")
   end
 
   # GET /players/new
